@@ -6,26 +6,27 @@ source $SCRIPT_PATH/../util.sh
 
 error_if_not_installed git
 
-sudo apt -y install \
-	g++ \
-	libgtk-3-dev \
-	gtk-doc-tools \
-	gnutls-bin \
-	valac \
-	intltool \
-	libpcre2-dev \
-	libglib3.0-cil-dev \
-	libgnutls28-dev \
-	libgirepository1.0-dev \
-	libxml2-utils \
-	gperf
-
 if assert_is_installed termite; then log_info "termite is already installed"
 else
+  sudo apt -y install \
+    g++ \
+    libgtk-3-dev \
+    gtk-doc-tools \
+    gnutls-bin \
+    valac \
+    intltool \
+    libpcre2-dev \
+    libglib3.0-cil-dev \
+    libgnutls28-dev \
+    libgirepository1.0-dev \
+    libxml2-utils \
+    gperf
+
 	cd /tmp
 	git clone https://github.com/thestinger/vte-ng.git && cd vte-ng
 	echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-	./autogen.sh && make && sudo make install
+	./autogen.sh
+  make && sudo make install
 
 	cd /tmp
 	git clone --recursive https://github.com/thestinger/termite.git && cd termite

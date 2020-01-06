@@ -46,3 +46,35 @@ function error_if_not_installed {
 		exit 1
 	fi
 }
+
+function read_password {
+  local return="$1"; shift
+
+  local first
+  local second
+
+  local attempt=0
+  while true; do
+    echo -n "Password: "
+    read -s first
+    echo
+    echo -n "Retype password: "
+    read -s second
+    [ $first = $second ] && break
+
+    local attempt=$((++attempt))
+    if [ $attempt -gt 2 ]; then
+      echo
+      echo "Missing password, aborting..."
+
+      unset first
+      unset second
+      break
+    fi
+
+    echo
+    echo "Passwords do not match. ($attempt/3)"
+  done
+
+  eval $return="'$first'"
+}

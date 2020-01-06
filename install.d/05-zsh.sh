@@ -4,7 +4,10 @@ SCRIPT_PATH="$(dirname "$(readlink -f "$BASH_SOURCE")")"
 SCRIPT_NAME="$(basename "$BASH_SOURCE")"
 source $SCRIPT_PATH/../util.sh
 
-sudo apt -y install zsh
+if dpkg -s &>/dev/null; then log_info "zsh is already installed"
+else
+  sudo apt -y install zsh
+fi
 
 if [[ $SHELL != $(which zsh) ]]; then
   chsh -s $(which zsh)
@@ -18,3 +21,4 @@ fi
 
 sudo apt -y install python3-pip
 pip3 install thefuck
+
