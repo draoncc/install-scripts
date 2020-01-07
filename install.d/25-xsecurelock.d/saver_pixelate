@@ -1,0 +1,27 @@
+#!/bin/bash
+
+tmpfile=xsecurelock_saver_pixelate_screenshot
+
+if [ -f "/tmp/${tmpfile}.jpg" ]; then
+  rm -f "/tmp/${tmpfile}.jpg"
+
+  values=( 1 2 4 11 18 23 26 28 29 30 );
+  for factor in "${values[@]}"; do
+    unset x y w h
+    eval $(xwininfo -id ${XSCREENSAVER_WINDOW} |
+      sed -n -e "s/^ \+Absolute upper-left X: \+\([0-9]\+\).*/x=\1/p" \
+             -e "s/^ \+Absolute upper-left Y: \+\([0-9]\+\).*/y=\1/p" \
+             -e "s/^ \+Width: \+\([0-9]\+\).*/w=\1/p" \
+             -e "s/^ \+Height: \+\([0-9]\+\).*/h=\1/p" ) 
+
+    xloadimage \
+      -quiet \
+      -windowid "${XSCREENSAVER_WINDOW}" \
+      -clip "$x,$y,$w,$h" \
+      "/tmp/${tmpfile}-$factor.jpg"
+
+    rm -f "/tmp/${tmpfile}-$factor.jpg"
+
+    sleep 0
+  done
+fi

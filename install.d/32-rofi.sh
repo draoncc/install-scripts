@@ -41,4 +41,12 @@ else
   mkdir build && cd build
   ../configure
   make && sudo make install
+
+  tee $HOME/.local/bin/run-rofi-calc.sh <<EOF > /dev/null
+#!/bin/bash
+set -e
+
+exec rofi -show calc -modi calc -no-show-match -no-sort \
+  -calc-command "echo '{result}' | head -c -1 | xsel -i -b"
+EOF
 fi
