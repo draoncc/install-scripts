@@ -22,13 +22,13 @@ else
     libxml2-utils \
     gperf
 
-	cd /tmp
+  cd $(mktemp -d)
 	git clone https://github.com/thestinger/vte-ng.git && cd vte-ng
 	echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
 	./autogen.sh
   make && sudo make install
 
-	cd /tmp
+  cd $(mktemp -d)
 	git clone --recursive https://github.com/thestinger/termite.git && cd termite
 	make && sudo make install
 

@@ -9,7 +9,7 @@ else
   sudo apt update
   sudo apt -y install rofi
 
-  cd /tmp
+  cd $(mktemp -d)
   git clone https://github.com/davatorium/rofi-themes && cd rofi-themes
 
   xdg=${XDG_DATA_HOME:-${HOME}/.local/share}
@@ -35,7 +35,7 @@ if [ -f /usr/lib/x86_64-linux-gnu/rofi/calc.so ]; then log_info "rofi-calc is al
 else
   sudo apt -y install rofi-dev qalc libqalculate-dev
 
-  cd /tmp
+  cd $(mktemp -d)
   git clone https://github.com/svenstaro/rofi-calc && cd rofi-calc
   autoreconf -i
   mkdir build && cd build

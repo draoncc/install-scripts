@@ -30,7 +30,7 @@ else
     pkg-config \
     x11proto-core-dev
 
-  cd /tmp
+  cd $(mktemp -d)
   git clone https://github.com/google/xsecurelock.git && cd xsecurelock
   sh autogen.sh
   ./configure --with-pam-service-name=common-auth

@@ -6,4 +6,5 @@ SCRIPT_NAME="$(basename "$BASH_SOURCE")"
 sudo apt update
 sudo apt -y install \
   curl \
+  unzip \
   software-properties-common

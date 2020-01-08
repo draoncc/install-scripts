@@ -40,7 +40,7 @@ else
     libtool \
     automake
 
-	cd /tmp
+  cd $(mktemp -d)
 	git clone https://github.com/Airblader/i3.git i3-gaps && cd i3-gaps
   git checkout gaps && git pull
 	autoreconf --force --install
@@ -64,7 +64,7 @@ fi
 
 if assert_is_installed i3status-rs; then log_info "i3status-rs is already installed"
 else
-	cd /tmp
+  cd $(mktemp -d)
 	git clone https://github.com/greshake/i3status-rust && cd i3status-rust
 	cargo build --release
 	cp target/release/i3status-rs $HOME/.local/bin/i3status-rs
