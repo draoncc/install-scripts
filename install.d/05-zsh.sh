@@ -4,7 +4,7 @@ SCRIPT_PATH="$(dirname "$(readlink -f "$BASH_SOURCE")")"
 SCRIPT_NAME="$(basename "$BASH_SOURCE")"
 source $SCRIPT_PATH/../util.sh
 
-if dpkg -s &>/dev/null; then log_info "zsh is already installed"
+if dpkg -s zsh &>/dev/null; then log_info "zsh is already installed"
 else
   sudo apt -y install zsh
 fi

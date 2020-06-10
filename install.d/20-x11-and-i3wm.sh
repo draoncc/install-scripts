@@ -66,6 +66,7 @@ if assert_is_installed i3status-rs; then log_info "i3status-rs is already instal
 else
   cd $(mktemp -d)
 	git clone https://github.com/greshake/i3status-rust && cd i3status-rust
+  sudo apt -y install libdbus-1-dev
 	cargo build --release
 	cp target/release/i3status-rs $HOME/.local/bin/i3status-rs
 fi

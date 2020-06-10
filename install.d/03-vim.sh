@@ -15,6 +15,5 @@ else
   sudo ln -s /usr/bin/nvim.appimage /usr/bin/nvim
 fi
 
-sudo apt -y install python-pip python3-pip
-pip2 install pynvim
+sudo apt -y install python3-pip 
 pip3 install pynvim

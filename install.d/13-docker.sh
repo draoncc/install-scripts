@@ -7,7 +7,7 @@ source $SCRIPT_PATH/../util.sh
 error_if_not_installed curl
 error_if_not_installed add-apt-repository
 
-if dpgk -s docker-ce &>/dev/null; then log_info "docker is already installed"
+if dpkg -s docker-ce &>/dev/null; then log_info "docker is already installed"
 else
   sudo apt -y install \
     apt-transport-https \

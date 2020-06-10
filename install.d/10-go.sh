@@ -8,7 +8,6 @@ error_if_not_installed add-apt-repository
 
 if dpkg -s golang-go &>/dev/null; then log_info "go is already installed"
 else
-  sudo add-apt-repository -y ppa:longsleep/golang-backports
   sudo apt update
   sudo apt -y install golang-go
 fi

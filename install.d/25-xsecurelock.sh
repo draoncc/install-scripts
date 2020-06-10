@@ -36,6 +36,6 @@ else
   ./configure --with-pam-service-name=common-auth
   make && sudo make install
 
-  cp "$SCRIPT_PATH/${SCRIPT_NAME%.*}.d/saver_pixelate" /usr/local/libexec/xsecurelock/saver_pixelate
+  sudo cp "$SCRIPT_PATH/${SCRIPT_NAME%.*}.d/saver_pixelate" /usr/local/libexec/xsecurelock/saver_pixelate
   cp "$SCRIPT_PATH/${SCRIPT_NAME%.*}.d/run-xsecurelock.sh" $HOME/.local/bin/run-xsecurelock.sh
 fi

@@ -5,8 +5,6 @@ SCRIPT_NAME="$(basename "$BASH_SOURCE")"
 
 if dpkg -s rofi &>/dev/null; then log_info "rofi is already installed"
 else
-  sudo add-apt-repository -y ppa:jasonpleau/rofi
-  sudo apt update
   sudo apt -y install rofi
 
   cd $(mktemp -d)
