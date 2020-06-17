@@ -47,4 +47,19 @@ set -e
 exec rofi -show calc -modi calc -no-show-match -no-sort \
   -calc-command "echo '{result}' | head -c -1 | xsel -i -b"
 EOF
+  chmod 755 $HOME/.local/bin/run-rofi-calc.sh
+fi
+
+if assert_is_installed rofi-screenshot; then log_info "rofi-screenshot is already installed"
+else
+  sudo apt -y install ffmpeg xclip slop
+
+  cd $(mktemp -d)
+  git clone --recursive https://github.com/lolilolicon/FFcast && cd FFcast
+  ./bootstrap
+  ./configure --enable-xrectsel
+  make && sudo make install
+
+  curl -L https://git.io/rofi-screenshot > $HOME/.local/bin/rofi-screenshot
+  chmod 755 $HOME/.local/bin/rofi-screenshot
 fi
