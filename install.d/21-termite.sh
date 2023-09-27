@@ -6,34 +6,36 @@ source $SCRIPT_PATH/../util.sh
 
 error_if_not_installed git
 
-if assert_is_installed termite; then log_info "termite is already installed"
+if assert_is_installed termite; then
+	log_info "termite is already installed"
 else
-  sudo apt -y install \
-    g++ \
-    libgtk-3-dev \
-    gtk-doc-tools \
-    gnutls-bin \
-    valac \
-    intltool \
-    libpcre2-dev \
-    libglib3.0-cil-dev \
-    libgnutls28-dev \
-    libgirepository1.0-dev \
-    libxml2-utils \
-    gperf
+	sudo apt -y install \
+		g++ \
+		libgtk-3-dev \
+		gtk-doc-tools \
+		gnutls-bin \
+		valac \
+		intltool \
+		libpcre2-dev \
+		libglib3.0-cil-dev \
+		libgnutls28-dev \
+		libgirepository1.0-dev \
+		libxml2-utils \
+		gperf
 
-  cd $(mktemp -d)
+	cd $(mktemp -d)
 	git clone https://github.com/thestinger/vte-ng.git && cd vte-ng
 	echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
 	./autogen.sh
-  make && sudo make install
+	make && sudo make install
 
-  cd $(mktemp -d)
+	cd $(mktemp -d)
 	git clone --recursive https://github.com/thestinger/termite.git && cd termite
 	make && sudo make install
 
 	sudo ldconfig
-	sudo mkdir -p /lib/terminfo/x; sudo ln -s \
+	sudo mkdir -p /lib/terminfo/x
+	sudo ln -s \
 		/usr/local/share/terminfo/x/xterm-termite \
 		/lib/terminfo/x/xterm-termite
 

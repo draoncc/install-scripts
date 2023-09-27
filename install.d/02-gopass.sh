@@ -6,21 +6,22 @@ source $SCRIPT_PATH/../util.sh
 
 error_if_not_installed git
 
-if dpkg -s gopass &>/dev/null; then log_info "gopass is already installed"
+if dpkg -s gopass &>/dev/null; then
+	log_info "gopass is already installed"
 else
-  sudo apt -y install gnupg2 rng-tools
+	sudo apt -y install gnupg2 rng-tools
 
-  wget -q -O- https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key | sudo apt-key add -
-  echo "deb https://dl.bintray.com/gopasspw/gopass bionic main" | sudo tee /etc/apt/sources.list.d/gopass.list
+	wget -q -O- https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key | sudo apt-key add -
+	echo "deb https://dl.bintray.com/gopasspw/gopass bionic main" | sudo tee /etc/apt/sources.list.d/gopass.list
 
-  sudo apt update
-  sudo apt -y install gopass
+	sudo apt update
+	sudo apt -y install gopass
 
-  read_password password
+	read_password password
 
-  if [[ ! -z $password ]]; then
-    readonly opts=$(mktemp)
-    tee $opts <<EOF > /dev/null
+	if [[ ! -z $password ]]; then
+		readonly opts=$(mktemp)
+		tee $opts <<EOF >/dev/null
 %echo Generating OpenGPG key for usage with gopass
 Key-Type: RSA
 Key-Length: 4096
@@ -32,8 +33,9 @@ Passphrase: $password
 %echo Done
 EOF
 
-    unset password
-    gpg --batch --gen-key $opts
-  else echo "Skipped GPG key generation. Make sure to generate a key for gopass (https://github.com/gopasspw/gopass/blob/master/docs/setup.md)"
-  fi
+		unset password
+		gpg --batch --gen-key $opts
+	else
+		echo "Skipped GPG key generation. Make sure to generate a key for gopass (https://github.com/gopasspw/gopass/blob/master/docs/setup.md)"
+	fi
 fi

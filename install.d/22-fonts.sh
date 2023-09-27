@@ -6,9 +6,10 @@ source $SCRIPT_PATH/../util.sh
 
 error_if_not_installed git
 
-if [[ -f "$HOME/.local/share/fonts/Ubuntu Mono derivative Powerline.ttf" ]]; then log_info "fonts-powerline is already installed"
+if [[ -f "$HOME/.local/share/fonts/Ubuntu Mono derivative Powerline.ttf" ]]; then
+	log_info "fonts-powerline is already installed"
 else
-  cd $(mktemp -d)
-  git clone https://github.com/powerline/fonts.git --depth 1 && cd fonts
-  ./install.sh
+	cd $(mktemp -d)
+	git clone https://github.com/powerline/fonts.git --depth 1 && cd fonts
+	./install.sh
 fi

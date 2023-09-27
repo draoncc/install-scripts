@@ -5,19 +5,22 @@ set -e
 readonly PPWD=$PWD
 
 if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run with sudo"
-  exit 1
+	echo "This script must be run with sudo"
+	exit 1
 fi
 
 function prompt {
-  while true; do
-    read -p "$1 (y|n)" yn
-    case $yn in
-      [Yy]* ) return 0; break;;
-      [Nn]* ) return 1;;
-      * ) continue;;
-    esac
-  done
+	while true; do
+		read -p "$1 (y|n)" yn
+		case $yn in
+		[Yy]*)
+			return 0
+			break
+			;;
+		[Nn]*) return 1 ;;
+		*) continue ;;
+		esac
+	done
 }
 
 KERNEL_VERSION=5.1.21
